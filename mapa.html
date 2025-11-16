@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Reciclaje - EcoAmigables</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Leaflet Routing Machine CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">♻️</span>
+                <span class="logo-text">EcoAmigables</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">🏠 Inicio</a>
+                <a href="guias.html">📚 Guías</a>
+                <a href="mapa.html" class="active">📍 Mapa</a>
+                <a href="metas.html">🎯 Metas</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="page-header">
+            <h1>Encuentra tu Punto de Reciclaje</h1>
+            <p class="subtitle">Ruta al centro de acopio más cercano</p>
+        </header>
+
+        <!-- Botón de ubicación -->
+        <div class="location-section">
+            <button id="locationBtn" onclick="getLocation()" class="location-button">
+                📍 Activar mi Ubicación
+            </button>
+            <p id="locationStatus" class="location-status"></p>
+        </div>
+
+        <!-- Info del punto más cercano -->
+        <div id="nearestPointInfo" class="nearest-point-info" style="display: none;">
+            <h3>🎯 Punto más cercano:</h3>
+            <div id="nearestPointDetails"></div>
+        </div>
+
+        <!-- Mapa -->
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+
+        <!-- Lista de puntos -->
+        <div class="points-grid">
+            <div class="point-card">
+                <h3>🗑️ Centro de Acopio Norte</h3>
+                <p><strong>Materiales:</strong> Papel, cartón, plástico, vidrio</p>
+                <p><strong>Horario:</strong> Lun-Vie: 8:00-17:00</p>
+                <p><strong>Dirección:</strong> Av. Francisco de Orellana y Justino Cornejo</p>
+            </div>
+
+            <div class="point-card">
+                <h3>🗑️ Punto Verde Kennedy</h3>
+                <p><strong>Materiales:</strong> Plástico, latas, botellas PET</p>
+                <p><strong>Horario:</strong> Lun-Sab: 9:00-18:00</p>
+                <p><strong>Dirección:</strong> Av. Luis Plaza Dañín, Kennedy Norte</p>
+            </div>
+
+            <div class="point-card">
+                <h3>🗑️ EcoEstación Sur</h3>
+                <p><strong>Materiales:</strong> Papel, cartón, electrónicos</p>
+                <p><strong>Horario:</strong> Mar-Dom: 8:00-16:00</p>
+                <p><strong>Dirección:</strong> Av. 25 de Julio, ciudadela Urdesa</p>
+            </div>
+        </div>
+
+        <!-- Botón de acción -->
+        <div class="action-section">
+            <a href="index.html" class="action-button">🏠 Volver al Inicio</a>
+        </div>
+    </div>
+
+    <footer>
+        <p style="font-size: 1.2em; margin-bottom: 10px;">🌍 Juntos por un Guayaquil más verde</p>
+        <p class="footer-contact">© 2024 EcoAmigables - Contacto: info@ecoamigables.ec</p>
+    </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Leaflet Routing Machine JS -->
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Variables globales
+        let map;
+        let userMarker;
+        let routingControl;
+        let userLocation = null;
+
+        // Puntos de reciclaje
+        const recyclingPoints = [
+            {
+                coords: [-2.1894, -79.8875],
+                name: 'Centro de Acopio Norte',
+                materials: 'Papel, cartón, plástico, vidrio',
+                hours: 'Lun-Vie: 8:00-17:00',
+                address: 'Av. Francisco de Orellana y Justino Cornejo'
+            },
+            {
+                coords: [-2.1709, -79.9224],
+                name: 'Punto Verde Kennedy',
+                materials: 'Plástico, latas, botellas PET',
+                hours: 'Lun-Sab: 9:00-18:00',
+                address: 'Av. Luis Plaza Dañín, Kennedy Norte'
+            },
+            {
+                coords: [-2.2153, -79.8862],
+                name: 'EcoEstación Sur',
+                materials: 'Papel, cartón, electrónicos',
+                hours: 'Mar-Dom: 8:00-16:00',
+                address: 'Av. 25 de Julio, ciudadela Urdesa'
+            }
+        ];
+
+        // Inicializar el mapa
+        function initMap() {
+            map = L.map('map').setView([-2.1894, -79.8875], 12);
+
+            // Agregar tiles de OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Agregar marcadores de puntos de reciclaje
+            recyclingPoints.forEach(point => {
+                const marker = L.marker(point.coords).addTo(map);
+                marker.bindPopup(`
+                    <div style="padding: 10px;">
+                        <h3 style="color: #2e7d32; margin-bottom: 10px; font-weight: bold;">${point.name}</h3>
+                        <p style="margin: 5px 0;"><strong>Materiales:</strong> ${point.materials}</p>
+                        <p style="margin: 5px 0;"><strong>Horario:</strong> ${point.hours}</p>
+                        <p style="margin: 5px 0;"><strong>Dirección:</strong> ${point.address}</p>
+                    </div>
+                `);
+            });
+        }
+
+        // Calcular distancia usando fórmula de Haversine (más precisa que Euclidiana)
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Radio de la Tierra en km
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = 
+                Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            const distance = R * c;
+            return distance;
+        }
+
+        // Encontrar el punto más cercano
+        function findNearestPoint(userLat, userLon) {
+            let nearest = null;
+            let minDistance = Infinity;
+
+            recyclingPoints.forEach(point => {
+                const distance = calculateDistance(
+                    userLat, 
+                    userLon, 
+                    point.coords[0], 
+                    point.coords[1]
+                );
+
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    nearest = { ...point, distance };
+                }
+            });
+
+            return nearest;
+        }
+
+        // Obtener ubicación del usuario
+        function getLocation() {
+            const statusEl = document.getElementById('locationStatus');
+            const btnEl = document.getElementById('locationBtn');
+
+            if (!navigator.geolocation) {
+                statusEl.textContent = '❌ Tu navegador no soporta geolocalización';
+                statusEl.style.color = '#f44336';
+                return;
+            }
+
+            btnEl.disabled = true;
+            btnEl.textContent = '🔄 Obteniendo ubicación...';
+            statusEl.textContent = '📡 Buscando tu ubicación...';
+            statusEl.style.color = '#2196F3';
+
+            navigator.geolocation.getCurrentPosition(
+                // Éxito
+                (position) => {
+                    userLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    statusEl.textContent = '✅ Ubicación obtenida';
+                    statusEl.style.color = '#4CAF50';
+                    btnEl.textContent = '✅ Ubicación Activa';
+
+                    // Agregar marcador del usuario
+                    if (userMarker) {
+                        map.removeLayer(userMarker);
+                    }
+
+                    const userIcon = L.icon({
+                        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+                        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+                        iconSize: [25, 41],
+                        iconAnchor: [12, 41],
+                        popupAnchor: [1, -34],
+                        shadowSize: [41, 41]
+                    });
+
+                    userMarker = L.marker([userLocation.lat, userLocation.lng], {icon: userIcon}).addTo(map);
+                    userMarker.bindPopup('<strong>📍 Tu ubicación</strong>').openPopup();
+
+                    // Centrar mapa en el usuario
+                    map.setView([userLocation.lat, userLocation.lng], 13);
+
+                    // Encontrar punto más cercano
+                    const nearest = findNearestPoint(userLocation.lat, userLocation.lng);
+
+                    // Mostrar información del punto más cercano
+                    const infoDiv = document.getElementById('nearestPointInfo');
+                    const detailsDiv = document.getElementById('nearestPointDetails');
+                    
+                    detailsDiv.innerHTML = `
+                        <p><strong>${nearest.name}</strong></p>
+                        <p>📏 Distancia: ${nearest.distance.toFixed(2)} km</p>
+                        <p>🗑️ Materiales: ${nearest.materials}</p>
+                        <p>🕐 Horario: ${nearest.hours}</p>
+                        <p>📍 ${nearest.address}</p>
+                    `;
+                    infoDiv.style.display = 'block';
+
+                    // Calcular y mostrar ruta
+                    showRoute(userLocation, nearest.coords);
+                },
+                // Error
+                (error) => {
+                    btnEl.disabled = false;
+                    btnEl.textContent = '📍 Activar mi Ubicación';
+                    
+                    let errorMsg = '';
+                    switch(error.code) {
+                        case error.PERMISSION_DENIED:
+                            errorMsg = '❌ Permiso de ubicación denegado. Por favor, activa los permisos en tu navegador.';
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            errorMsg = '❌ Ubicación no disponible.';
+                            break;
+                        case error.TIMEOUT:
+                            errorMsg = '❌ Tiempo de espera agotado.';
+                            break;
+                        default:
+                            errorMsg = '❌ Error al obtener ubicación.';
+                    }
+                    statusEl.textContent = errorMsg;
+                    statusEl.style.color = '#f44336';
+                }
+            );
+        }
+
+        // Mostrar ruta en el mapa
+        function showRoute(start, end) {
+            // Remover ruta anterior si existe
+            if (routingControl) {
+                map.removeControl(routingControl);
+            }
+
+            // Crear nueva ruta
+            routingControl = L.Routing.control({
+                waypoints: [
+                    L.latLng(start.lat, start.lng),
+                    L.latLng(end[0], end[1])
+                ],
+                routeWhileDragging: false,
+                showAlternatives: false,
+                lineOptions: {
+                    styles: [{color: '#4CAF50', weight: 5, opacity: 0.8}]
+                },
+                createMarker: function() { return null; }, // No crear marcadores adicionales
+                addWaypoints: false
+            }).addTo(map);
+        }
+
+        // Inicializar mapa al cargar la página
+        window.onload = function() {
+            initMap();
+        };
+    </script>
+</body>
+</html>

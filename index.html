@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoAmigables - Tu guía fácil para reciclar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Barra superior animada -->
+    <div class="top-banner">
+        <div class="banner-content">
+            <span class="banner-icon">🌍</span>
+            <span class="banner-text">¡Únete al cambio! Más de <strong>500 familias</strong> ya reciclan en Guayaquil</span>
+            <span class="banner-icon">♻️</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo">♻️</div>
+            <h1>EcoAmigables</h1>
+            <p class="slogan">Tu guía fácil para reciclar desde casa</p>
+            <button class="main-button" onclick="window.location.href='mapa.html'">🌱 Empezar a Reciclar</button>
+        </header>
+
+        <!-- Estadísticas animadas -->
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-icon">🗑️</div>
+                <div class="stat-number" data-target="75">0</div>
+                <div class="stat-label">Toneladas recicladas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🌳</div>
+                <div class="stat-number" data-target="1200">0</div>
+                <div class="stat-label">Árboles salvados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-number" data-target="500">0</div>
+                <div class="stat-label">Familias activas</div>
+            </div>
+        </div>
+
+        <div class="description">
+            <h2>¿Qué es EcoAmigables?</h2>
+            <p>
+                Somos tu aliado perfecto para comenzar a reciclar en casa de manera fácil y efectiva. 
+                Aprende cómo separar correctamente tus residuos, encuentra los puntos de reciclaje más cercanos 
+                en Guayaquil y establece metas para crear un hábito sostenible que beneficie a tu familia y al planeta.
+            </p>
+        </div>
+
+        <!-- Impacto ambiental -->
+        <div class="impact-section">
+            <h2>💚 Nuestro Impacto</h2>
+            <div class="impact-bars">
+                <div class="impact-item">
+                    <div class="impact-label">
+                        <span>Reducción de CO₂</span>
+                        <span class="impact-value">85%</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-impact" style="width: 85%; background: #4CAF50;"></div>
+                    </div>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-label">
+                        <span>Ahorro de agua</span>
+                        <span class="impact-value">70%</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-impact" style="width: 70%; background: #2196F3;"></div>
+                    </div>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-label">
+                        <span>Reducción de residuos</span>
+                        <span class="impact-value">92%</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-impact" style="width: 92%; background: #FF9800;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3>Guías Educativas</h3>
+                <p>Aprende a separar residuos correctamente paso a paso</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📍</div>
+                <h3>Puntos de Reciclaje</h3>
+                <p>Encuentra centros de acopio cerca de tu hogar en Guayaquil</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Metas Personales</h3>
+                <p>Crea hábitos sostenibles con objetivos claros y alcanzables</p>
+            </div>
+        </div>
+
+        <!-- Llamado a la acción -->
+        <div class="cta-section">
+            <h2>🌟 ¿Listo para hacer la diferencia?</h2>
+            <p>Cada pequeña acción cuenta. Comienza tu viaje hacia un estilo de vida más sostenible hoy.</p>
+            <div class="cta-buttons">
+                <button onclick="window.location.href='guias.html'" class="cta-btn primary">📚 Ver Guías</button>
+                <button onclick="window.location.href='mapa.html'" class="cta-btn secondary">📍 Encontrar Puntos</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p style="font-size: 1.2em; margin-bottom: 10px;">🌍 Juntos por un Guayaquil más verde</p>
+        <p class="footer-contact">© 2024 EcoAmigables - Contacto: info@ecoamigables.ec</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Animación de números contadores
+        function animateNumbers() {
+            const counters = document.querySelectorAll('.stat-number');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const updateCounter = () => {
+                    current += step;
+                    if (current < target) {
+                        counter.textContent = Math.floor(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+                
+                updateCounter();
+            });
+        }
+
+        // Animación de barras de progreso
+        function animateProgressBars() {
+            const bars = document.querySelectorAll('.progress-bar-impact');
+            bars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        }
+
+        // Ejecutar animaciones cuando se carga la página
+        window.addEventListener('load', () => {
+            animateNumbers();
+            animateProgressBars();
+        });
+    </script>
+</body>
+</html>

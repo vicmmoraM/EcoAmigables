@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guías de Reciclaje - EcoAmigables</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">♻️</span>
+                <span class="logo-text">EcoAmigables</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">🏠 Inicio</a>
+                <a href="guias.html" class="active">📚 Guías</a>
+                <a href="mapa.html">📍 Mapa</a>
+                <a href="metas.html">🎯 Metas</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="page-header">
+            <h1>Guías de Reciclaje</h1>
+            <p class="subtitle">Aprende a separar tus residuos correctamente</p>
+        </header>
+
+        <!-- Sección principal -->
+        <div class="info-box">
+            <h2>¿Cómo separar residuos en casa?</h2>
+            <p>
+                La separación correcta de residuos es el primer paso para un reciclaje efectivo. 
+                Utiliza contenedores diferentes y sigue estas categorías:
+            </p>
+        </div>
+
+        <!-- Videos educativos -->
+        <div class="videos-section">
+            <h2 class="section-title">🎥 Videos Educativos</h2>
+            <div class="videos-grid">
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe 
+                            width="100%" 
+                            height="315" 
+                            src="https://www.youtube.com/embed/6jQ7y_qQYUA" 
+                            title="Cómo reciclar correctamente" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <h3>¿Qué es el Reciclaje?</h3>
+                    <p>Conceptos básicos sobre reciclaje y su importancia</p>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe 
+                            width="100%" 
+                            height="315" 
+                            src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                            title="Separación de residuos" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <h3>Cómo Separar en Casa</h3>
+                    <p>Técnicas efectivas de separación de residuos</p>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe 
+                            width="100%" 
+                            height="315" 
+                            src="https://www.youtube.com/embed/jNQXAC9IVRw" 
+                            title="Reciclaje de plásticos" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <h3>Reciclaje de Plásticos</h3>
+                    <p>Tipos de plásticos y cómo reciclarlos</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Infografías -->
+        <div class="infographics-section">
+            <h2 class="section-title">📊 Infografías Educativas</h2>
+            <div class="infographics-grid">
+                <div class="infographic-card" onclick="openModal('modal1')">
+                    <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #4CAF50, #81C784); display: flex; align-items: center; justify-content: center; color: white; font-size: 2em; font-weight: bold; text-align: center; padding: 20px;">
+                        🗑️<br>Separación<br>por Colores
+                    </div>
+                    <h4>🗑️ Separación por Colores</h4>
+                    <p class="click-hint">Click para ampliar</p>
+                </div>
+                <div class="infographic-card" onclick="openModal('modal2')">
+                    <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #2196F3, #64B5F6); display: flex; align-items: center; justify-content: center; color: white; font-size: 2em; font-weight: bold; text-align: center; padding: 20px;">
+                        ♻️<br>Símbolos de<br>Reciclaje
+                    </div>
+                    <h4>♻️ Símbolos de Reciclaje</h4>
+                    <p class="click-hint">Click para ampliar</p>
+                </div>
+                <div class="infographic-card" onclick="openModal('modal3')">
+                    <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #FF9800, #FFB74D); display: flex; align-items: center; justify-content: center; color: white; font-size: 2em; font-weight: bold; text-align: center; padding: 20px;">
+                        ⏱️<br>Tiempo de<br>Descomposición
+                    </div>
+                    <h4>⏱️ Tiempo de Descomposición</h4>
+                    <p class="click-hint">Click para ampliar</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modales para infografías -->
+        <div id="modal1" class="modal">
+            <div class="modal-content-info">
+                <span class="close" onclick="closeModal('modal1')">&times;</span>
+                <div style="background: white; padding: 40px; border-radius: 15px; max-width: 800px; margin: 0 auto;">
+                    <h2 style="color: #4CAF50; text-align: center; margin-bottom: 30px;">🗑️ Separación por Colores</h2>
+                    <div style="display: grid; gap: 20px;">
+                        <div style="background: #4CAF50; color: white; padding: 20px; border-radius: 10px;">
+                            <h3>🟢 Verde - Reciclables</h3>
+                            <p>Papel, cartón, plástico, vidrio, latas</p>
+                        </div>
+                        <div style="background: #FFC107; color: white; padding: 20px; border-radius: 10px;">
+                            <h3>🟡 Amarillo - Orgánicos</h3>
+                            <p>Restos de comida, cáscaras, residuos de jardín</p>
+                        </div>
+                        <div style="background: #f44336; color: white; padding: 20px; border-radius: 10px;">
+                            <h3>🔴 Rojo - Peligrosos</h3>
+                            <p>Pilas, baterías, medicamentos, químicos</p>
+                        </div>
+                        <div style="background: #9E9E9E; color: white; padding: 20px; border-radius: 10px;">
+                            <h3>⚫ Gris - No Reciclables</h3>
+                            <p>Residuos sanitarios, papel sucio, otros</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="modal2" class="modal">
+            <div class="modal-content-info">
+                <span class="close" onclick="closeModal('modal2')">&times;</span>
+                <div style="background: white; padding: 40px; border-radius: 15px; max-width: 800px; margin: 0 auto;">
+                    <h2 style="color: #2196F3; text-align: center; margin-bottom: 30px;">♻️ Símbolos de Reciclaje</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                        <div style="background: #E3F2FD; padding: 20px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 3em;">①</div>
+                            <strong>PET</strong>
+                            <p style="font-size: 0.9em;">Botellas de agua</p>
+                        </div>
+                        <div style="background: #E3F2FD; padding: 20px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 3em;">②</div>
+                            <strong>HDPE</strong>
+                            <p style="font-size: 0.9em;">Envases de leche</p>
+                        </div>
+                        <div style="background: #E3F2FD; padding: 20px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 3em;">③</div>
+                            <strong>PVC</strong>
+                            <p style="font-size: 0.9em;">Tuberías</p>
+                        </div>
+                        <div style="background: #E3F2FD; padding: 20px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 3em;">④</div>
+                            <strong>LDPE</strong>
+                            <p style="font-size: 0.9em;">Bolsas plásticas</p>
+                        </div>
+                        <div style="background: #E3F2FD; padding: 20px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 3em;">⑤</div>
+                            <strong>PP</strong>
+                            <p style="font-size: 0.9em;">Tapas de botellas</p>
+                        </div>
+                        <div style="background: #E3F2FD; padding: 20px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 3em;">⑥</div>
+                            <strong>PS</strong>
+                            <p style="font-size: 0.9em;">Vasos desechables</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="modal3" class="modal">
+            <div class="modal-content-info">
+                <span class="close" onclick="closeModal('modal3')">&times;</span>
+                <div style="background: white; padding: 40px; border-radius: 15px; max-width: 800px; margin: 0 auto;">
+                    <h2 style="color: #FF9800; text-align: center; margin-bottom: 30px;">⏱️ Tiempo de Descomposición</h2>
+                    <div style="display: grid; gap: 15px;">
+                        <div style="background: #FFF3E0; padding: 15px; border-radius: 10px; border-left: 5px solid #FF9800;">
+                            <strong>📄 Papel:</strong> 2-5 meses
+                        </div>
+                        <div style="background: #FFF3E0; padding: 15px; border-radius: 10px; border-left: 5px solid #FF9800;">
+                            <strong>🍎 Restos orgánicos:</strong> 3-6 meses
+                        </div>
+                        <div style="background: #FFF3E0; padding: 15px; border-radius: 10px; border-left: 5px solid #FF9800;">
+                            <strong>🥫 Lata de aluminio:</strong> 200-500 años
+                        </div>
+                        <div style="background: #FFF3E0; padding: 15px; border-radius: 10px; border-left: 5px solid #FF9800;">
+                            <strong>🍾 Botella de plástico:</strong> 100-1000 años
+                        </div>
+                        <div style="background: #FFF3E0; padding: 15px; border-radius: 10px; border-left: 5px solid #FF9800;">
+                            <strong>🍷 Botella de vidrio:</strong> 4000 años o más
+                        </div>
+                        <div style="background: #FFF3E0; padding: 15px; border-radius: 10px; border-left: 5px solid #FF9800;">
+                            <strong>👟 Zapatos de cuero:</strong> 25-40 años
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjetas de categorías -->
+        <div class="guide-grid">
+            <!-- Reciclables -->
+            <div class="guide-card green-card">
+                <div class="card-header">
+                    <div class="card-icon">♻️</div>
+                    <h3>Residuos Reciclables</h3>
+                </div>
+                <ul class="guide-list">
+                    <li>✅ Papel y cartón limpio</li>
+                    <li>✅ Botellas plásticas (PET)</li>
+                    <li>✅ Latas de aluminio</li>
+                    <li>✅ Vidrio limpio</li>
+                    <li>✅ Envases de tetrapack</li>
+                </ul>
+            </div>
+
+            <!-- Orgánicos -->
+            <div class="guide-card yellow-card">
+                <div class="card-header">
+                    <div class="card-icon">🍃</div>
+                    <h3>Residuos Orgánicos</h3>
+                </div>
+                <ul class="guide-list">
+                    <li>✅ Restos de frutas y verduras</li>
+                    <li>✅ Cáscaras de huevo</li>
+                    <li>✅ Café molido y bolsitas de té</li>
+                    <li>✅ Restos de jardín</li>
+                    <li>✅ Pan y cereales sin procesar</li>
+                </ul>
+            </div>
+
+            <!-- No Reciclables -->
+            <div class="guide-card red-card">
+                <div class="card-header">
+                    <div class="card-icon">🚫</div>
+                    <h3>No Reciclables</h3>
+                </div>
+                <ul class="guide-list">
+                    <li>❌ Papel sucio o grasoso</li>
+                    <li>❌ Plásticos no identificados</li>
+                    <li>❌ Cerámica y porcelana</li>
+                    <li>❌ Pañales y toallas sanitarias</li>
+                    <li>❌ Chicles y colillas</li>
+                </ul>
+            </div>
+
+            <!-- Qué NO hacer -->
+            <div class="guide-card purple-card">
+                <div class="card-header">
+                    <div class="card-icon">⚠️</div>
+                    <h3>Qué NO hacer</h3>
+                </div>
+                <ul class="guide-list">
+                    <li>❌ No mezclar residuos</li>
+                    <li>❌ No reciclar envases sucios</li>
+                    <li>❌ No tirar medicamentos a la basura</li>
+                    <li>❌ No desechar pilas con residuos comunes</li>
+                    <li>❌ No comprimir botellas excesivamente</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Tips rápidos -->
+        <div class="tips-section">
+            <h2>✨ Tips Rápidos</h2>
+            <div class="tips-grid">
+                <div class="tip-item">
+                    <span class="tip-icon">✓</span>
+                    <p>Limpia los envases antes de reciclarlos</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">✓</span>
+                    <p>Aplasta las botellas para ahorrar espacio</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">✓</span>
+                    <p>Separa las tapas de los envases</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">✓</span>
+                    <p>Usa contenedores de colores diferentes</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">✓</span>
+                    <p>Composta tus residuos orgánicos</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">✓</span>
+                    <p>Consulta el mapa de puntos de reciclaje</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recursos adicionales -->
+        <div class="resources-section">
+            <h2 class="section-title">📚 Recursos Adicionales</h2>
+            <div class="resources-grid">
+                <a href="https://www.ambiente.gob.ec/" target="_blank" class="resource-card">
+                    <div class="resource-icon">🌍</div>
+                    <h4>Ministerio del Ambiente</h4>
+                    <p>Información oficial sobre reciclaje en Ecuador</p>
+                </a>
+                <a href="https://www.guayaquil.gob.ec/" target="_blank" class="resource-card">
+                    <div class="resource-icon">🏛️</div>
+                    <h4>Municipio de Guayaquil</h4>
+                    <p>Programas de reciclaje locales</p>
+                </a>
+                <a href="https://www.reciclaecuador.com/" target="_blank" class="resource-card">
+                    <div class="resource-icon">♻️</div>
+                    <h4>Recicla Ecuador</h4>
+                    <p>Guías y campañas de reciclaje</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Botón de acción -->
+        <div class="action-section">
+            <a href="mapa.html" class="action-button">📍 Ver Puntos de Reciclaje</a>
+        </div>
+    </div>
+
+    <footer>
+        <p style="font-size: 1.2em; margin-bottom: 10px;">🌍 Juntos por un Guayaquil más verde</p>
+        <p class="footer-contact">© 2024 EcoAmigables - Contacto: info@ecoamigables.ec</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Funciones para los modales
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Cerrar modal al hacer click fuera
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
